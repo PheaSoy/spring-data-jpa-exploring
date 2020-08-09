@@ -17,16 +17,11 @@ import java.util.stream.Stream;
 public interface BookRepository extends CrudRepository<Book, Integer> {
 
 
-    Optional<Book> findBySnb(String snb);
+  List<Book> findTop2ByTitle(String author, Sort sort);
 
-    List<Book> findTop2ByAuthor(String author, Sort sort);
+  Streamable<Book> findByTitle(String author);
 
-    Streamable<Book> findByAuthor(String author);
+  Streamable<Book> findByPriceBetween(double start, double end);
 
-    Streamable<Book> findByPriceBetween(double start,double end);
-
-    @Transactional(readOnly = false ,timeout = 20)
-    @Query("UPDATE book set price = 100 where author='Hardy'")
-    public void updatePriceAsAuthorIsEqual_Hardy();
 
 }
